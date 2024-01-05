@@ -1,7 +1,16 @@
-const express = require("express");
+import express from "express";
+import usersRouter from "./routes/users.js"; 
+import productsRouter from "./routes/products.js";
+
 
 const app = express();
-const PORT = 5000;
+app.use(express.json());
+app.use(usersRouter);
+app.use(productsRouter);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+});
+console.log(`Running on Port ${PORT}`);
 
-
-app.listen(PORT, ()=>console.log(`Running on ${PORT}`))
+app.get("/", (request, response) => { response.status(201).send({ msg: "Hello" });
+});
