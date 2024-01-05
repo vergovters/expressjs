@@ -1,7 +1,9 @@
 import express from "express";
-import usersRouter from "./routes/users.js"; 
-import productsRouter from "./routes/products.js";
+import routes from "./routes/index";
+import cookieParser from "cookie-parser";
+import session from "express-session";
 import passport from "passport";
+import MongoStore from "connect-mongo";
 import mongoose from "mongoose";
 
 const app = express();
@@ -27,10 +29,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(routes);
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
 });
 console.log(`Running on Port ${PORT}`);
-
-app.get("/", (request, response) => { response.status(201).send({ msg: "Hello" });
-});
