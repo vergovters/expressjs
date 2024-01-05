@@ -4,7 +4,6 @@ import productsRouter from "./routes/products.js";
 import passport from "passport";
 import mongoose from "mongoose";
 
-
 const app = express();
 
 mongoose.connect("mongodb://localhost/expressjs").then(()=>console.log("conected to db"))
@@ -20,6 +19,9 @@ app.use(
         cookie: {
             maxAge: 60000 * 60,
         },
+        store: MongoStore.create({
+            client: mongoose.connection.getClient(),
+        }),
     })
 );
 app.use(passport.initialize());

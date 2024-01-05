@@ -5,12 +5,11 @@ import {
 	checkSchema,
 	matchedData,
 } from "express-validator";
-import { mockUsers } from "../utils/constants.mjs";
-import { createUserValidationSchema } from "../utils/validationSchemas.mjs";
+import { mockUsers } from "../utils/constants.js";
+import { createUserValidationSchema } from "../utils/validationSchemas.js";
 import { resolveIndexByUserId } from "../utils/middlewares.mjs";
-import { User } from "../mongoose/schemas/user.mjs";
-import { hashPassword } from "../utils/helpers.mjs";
-import { createUserHandler, getUserByIdHandler } from "../handlers/users.mjs";
+import { User } from "../mongoose/schemas/user.js";
+import { createUserHandler, getUserByIdHandler } from "../handlers/users.js";
 
 const router = Router();
 
