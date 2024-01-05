@@ -7,6 +7,9 @@ const app = express();
 app.use(express.json());
 app.use(usersRouter);
 app.use(productsRouter);
+app.use(cookieParser("cookcook"));
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
 });
