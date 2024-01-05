@@ -8,7 +8,16 @@ app.use(express.json());
 app.use(usersRouter);
 app.use(productsRouter);
 app.use(cookieParser("cookcook"));
-
+app.use(
+    session({
+        secret: "anson the dev",
+        saveUninitialized: true,
+        resave: false,
+        cookie: {
+            maxAge: 60000 * 60,
+        },
+    })
+);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
