@@ -1,6 +1,7 @@
 import express from "express";
 import usersRouter from "./routes/users.js"; 
 import productsRouter from "./routes/products.js";
+import passport from "passport";
 
 
 const app = express();
@@ -18,6 +19,8 @@ app.use(
         },
     })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
