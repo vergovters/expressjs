@@ -5,14 +5,18 @@ import {
 	checkSchema,
 	matchedData,
 } from "express-validator";
-import { mockUsers } from "../utils/constants.js";
-import { createUserValidationSchema } from "../utils/validationSchemas.js";
-import { resolveIndexByUserId } from "../utils/middlewares.js";
+import { mockUsers } from "../utils/constants.mjs";
+import { createUserValidationSchema } from "../utils/validationSchemas.mjs";
+import { resolveIndexByUserId } from "../utils/middlewares.mjs";
+import { User } from "../mongoose/schemas/user.mjs";
+import { hashPassword } from "../utils/helpers.mjs";
+import { createUserHandler, getUserByIdHandler } from "../handlers/users.mjs";
 
 const router = Router();
 
-router.get("/api/users",
-        query("filter")
+router.get(
+	"/api/users",
+	query("filter")
 		.isString()
 		.notEmpty()
 		.withMessage("Must not be empty")
@@ -36,12 +40,12 @@ router.get("/api/users",
 	}
 );
 
-router.get("/api/users/:id", resolveIndexByUserId);
+router.get("/api/users/:id", resolveIndexByUserId, getUserByIdHandler);
 
 router.post(
 	"/api/users",
 	checkSchema(createUserValidationSchema),
-
+	createUserHandler
 );
 
 router.put("/api/users/:id", resolveIndexByUserId, (request, response) => {

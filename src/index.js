@@ -2,9 +2,12 @@ import express from "express";
 import usersRouter from "./routes/users.js"; 
 import productsRouter from "./routes/products.js";
 import passport from "passport";
+import mongoose from "mongoose";
 
 
 const app = express();
+
+mongoose.connect("mongodb://localhost/expressjs").then(()=>console.log("conected to db"))
 app.use(express.json());
 app.use(usersRouter);
 app.use(productsRouter);
